@@ -8,6 +8,7 @@ export interface SiteConfig {
         github: string;
         linkedin: string;
         instagram: string;
+        facebook: string;
     }
 }
 
@@ -20,7 +21,8 @@ const siteConfig: SiteConfig = {
         youtube:"some",
         github: "github",
         linkedin: "some",
-        instagram:"some insta"
+        instagram:"some insta",
+        facebook:"facebook"
     }
 }
 
