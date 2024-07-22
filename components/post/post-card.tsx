@@ -11,7 +11,8 @@ interface PostProps {
 
 const PostCard = ({post, layout = "horizontal"}: PostProps) => {
   return (
-    <Link className="grid grid-cols-2 gap-10" href={`/post/${post.slug}`}>
+    <Link className={`${layout === "horizontal" ? "grid grid-cols-2 gap-10": "space-y-10" }`}
+    href={`/post/${post.slug}`}>
         {/* Post Image  */}
     <Image className="rounded-md w-full object-cover object-center max-h-[300px]" alt={post.title} src={post.image} width={600} height={300} />
         {/* Post Content */}
