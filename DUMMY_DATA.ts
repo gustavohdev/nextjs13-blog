@@ -40,7 +40,7 @@ export const DUMMY_POSTS: Post[] = [
     author: { id: "1", first_name: "John", last_name: "Doe" },
     slug: "the-majestic-city-of-london",
     image:
-      "https://images.unsplash.com/photo-1508050919630-b135583b29ab?ixid=MnwzODU2NTF8MHwxfHNlYXJjaHw5fHxwYXJpc3xlbnwwfHx8fDE2NzAyNzMzNDg&ixlib=rb-4.0.3",
+      "https://www.zaharaholidays.com/public/thumbs/package-gallery/611/Historic-Modern-London-1_450_750.jpg",
     body: "London is a global city and one of the world's leading financial, cultural, and political centers. It is known for its history, museums, and iconic landmarks such as the Tower of London, Buckingham Palace, and the London Eye. The city is also home to many prestigious universities, theaters, and sports teams.",
     date_created: "2021-07-03T00:00:00.000Z",
     date_updated: "2021-07-03T00:00:00.000Z",

@@ -5,6 +5,10 @@ const nextConfig = {
             {
                 hostname: "images.unsplash.com",
                 protocol: "https"
+            },
+            {
+                hostname: "www.zaharaholidays.com",
+                protocol: "https"
             }
     ]
     }
