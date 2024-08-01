@@ -1,9 +1,10 @@
 import { Facebook, Github, Instagram, Linkedin, Tablet, Twitter, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
+import { siWhatsapp } from 'simple-icons';
 
 const SocialLink = ({plataform, link, isSharedUrl = false}: { plataform: string; link: string; isSharedUrl?: boolean}) => {
-    
+    //console.log(icons.siWhatsapp)
     const getIcon = (plataform: string) => {
         switch (plataform){
             case "facebook":
@@ -19,10 +20,21 @@ const SocialLink = ({plataform, link, isSharedUrl = false}: { plataform: string;
             case "github":
                 return <Github size="20" />
             case "whatsapp":
-                return <Tablet size="18" />
+                return (
+                    <svg
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox={`0 0 24 24`}
+                        width="20"
+                        height="20"
+                        fill={''}
+                        >
+                        <path d={siWhatsapp.path} />
+                    </svg>
+                )
         }
     }
-  
+
     return (
         <Link href={link}>
             <div className={`${isSharedUrl 
