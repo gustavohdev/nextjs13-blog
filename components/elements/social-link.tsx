@@ -1,8 +1,8 @@
-import { Facebook, Github, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
+import { Facebook, Github, Instagram, Linkedin, Tablet, Twitter, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 
-const SocialLink = ({plataform, link}: { plataform: string; link: string}) => {
+const SocialLink = ({plataform, link, isSharedUrl = false}: { plataform: string; link: string; isSharedUrl?: boolean}) => {
     
     const getIcon = (plataform: string) => {
         switch (plataform){
@@ -18,11 +18,20 @@ const SocialLink = ({plataform, link}: { plataform: string; link: string}) => {
                 return <Linkedin size="20" />
             case "github":
                 return <Github size="20" />
+            case "whatsapp":
+                return <Tablet size="18" />
         }
     }
   
     return (
-        <Link href={link}>{getIcon(plataform)}</Link>
+        <Link href={link}>
+            <div className={`${isSharedUrl 
+                ? 'py-2 px-3 bg-neutral-200 rounded-md text-neutral-600 hover:bg-neutral-600 hover:text-neutral-100 duration-100 ease-in-out transition-colors' 
+                : ''}`}
+            >
+                {getIcon(plataform)}
+            </div>
+        </Link>
   )
 }
 
