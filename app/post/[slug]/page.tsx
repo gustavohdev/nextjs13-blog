@@ -27,7 +27,7 @@ const Page = ({params}:{
     if(!post) {
         notFound()
     }
-  return (
+return (
     <PaddingContainer>
         {/* Container */}
         <div className="space-y-10">
@@ -68,7 +68,7 @@ const Page = ({params}:{
                 <CTACard />
             </div>
     </PaddingContainer>
-  )
+        )
 }
 
 export default Page
