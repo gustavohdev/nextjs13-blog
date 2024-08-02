@@ -20,14 +20,21 @@ const Page = ({
     };
 }) => {
     console.log(params)
+
+    const category = DUMMY_CATEGORIES.find((category) => {
+        return category.slug === params.category
+    })
+
     const posts = DUMMY_POSTS.filter(
         (post) => post.category.title.toLocaleLowerCase() === params.category
     )
-    //console.log(posts)
-    // return <div>{params.category}</div>
-    // return <div>{JSON.stringify(posts)} </div>
     return (
         <PaddingContainer>
+            <div className="mb-10">
+                <h1 className="text-4xl font-semibold">{category?.title}</h1>
+                <p className="text-lg text-neutral-600">{category?.description}</p>
+            </div>
+            <h1>{}</h1>
             <PostList posts={posts} />
         </PaddingContainer>
     )

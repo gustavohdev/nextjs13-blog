@@ -13,7 +13,7 @@ const PostContent = ({ post, isPostPage = false }:PostContentProps) => {
     <div className='space-y-2'>
         {/* Tags */}
         
-        <div className={`${isPostPage ? "text-sm": "text-xs @md:text-sm" } flex items-center gap-2 text-xs @md:text-sm text-neutral-400`}>
+        <div className={`${isPostPage ? "text-sm": "text-xs @md:text-sm" } flex items-center flex-wrap gap-2 text-xs @md:text-sm text-neutral-400`}>
             <div className={`font-medium ${post.category.title === "Cities" ? "text-emerald-600" : "text-indigo-600"}`}>
                 {post.category.title}
             </div>
