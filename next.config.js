@@ -9,6 +9,10 @@ const nextConfig = {
             {
                 hostname: "www.zaharaholidays.com",
                 protocol: "https"
+            },
+            {
+                hostname: "directus-production-63bd.up.railway.app",
+                protocol: "https"
             }
     ]
     }
