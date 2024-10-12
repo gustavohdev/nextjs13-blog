@@ -92,7 +92,14 @@ export default async function Home() {
       // client.request(customEndpoint({path: "", method: "GET", headers:[auth:{
       // }]})
 
-      return response.data.data;
+      console.log(
+        "MY DATA",
+        response.data.data.filter((item: any) => item.status === "published")
+      );
+
+      return response.data.data.filter(
+        (item: any) => item.status === "published"
+      );
     } catch (error) {
       console.log(error);
       throw new Error("Error fetching posts");
@@ -115,12 +122,12 @@ export default async function Home() {
           )}
         />
         <CTACard />
-        <PostCard post={posts[3]} reverse={true} />
+        {/* <PostCard post={posts[3]} reverse={true} />
         <PostList
           posts={posts.filter(
             (post: any, index: any) => index > 3 && index < 6
           )}
-        />
+        /> */}
       </main>
     </PaddingContainer>
   );

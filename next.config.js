@@ -13,7 +13,16 @@ const nextConfig = {
             {
                 hostname: "directus-production-63bd.up.railway.app",
                 protocol: "https"
+            },
+            {
+                hostname: "img-cdn.pixlr.com",
+                protocol: "https"
+            },
+            {
+                hostname: "img.freepik.com",
+                protocol: "https"
             }
+            
     ]
     }
 }

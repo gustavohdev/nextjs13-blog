@@ -3,6 +3,7 @@ import Image from "next/image";
 import directus from "@/lib/directus";
 import axios from "axios";
 import { revalidateTag } from "next/cache";
+import siteConfig from "@/config/site";
 
 const CTACard = async () => {
   const formAction = async (formData: FormData) => {
@@ -88,18 +89,18 @@ const CTACard = async () => {
         fill
         alt="CTA Card Image"
         className="object-cover object-center"
-        src="https://images.unsplash.com/photo-1585970480901-90d6bb2a48b5?ixid=MnwzODU2NTF8MHwxfHNlYXJjaHwxOHx8RWxlcGhhbnRzJTIwdGhhaWxhbmR8ZW58MHx8fHwxNjcwMzIyNzUx&ixlib=rb-4.0.3"
+        src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/f8f22331-0ed9-41f9-9f56-790d43beecff.jpg`}
       />
       {/* Content Container */}
       <div className="relative z-20">
-        <div className="text-md font-medium">#exploretheworld</div>
+        <div className="text-md font-medium">{siteConfig.hash}</div>
         <h3 className="mt-3 text-3xl font-semibold">
-          Explore the world with me
+          Explore the world with me...
         </h3>
         <p className="max-w-lg mt-2 text-md">
-          Explore the world with me! I'm travelling around the world. I've
-          visited most of the great cities of USA and currently I'm travelling
-          in UE Join me!
+          I'm travelling between Frontend, Backend and DevOps, steering through
+          projects and charting novelty and fundamentals your way. Discover new
+          insights and sharpen your skills with each step of the journey.
         </p>
         {/* Form */}
         <form
@@ -121,7 +122,7 @@ const CTACard = async () => {
         {/* Subscribers */}
         <div className="mt-5 text-neutral-600">
           Join our{" "}
-          <span className="px-2 py-1 text-sm rounded-md bg-neutral-700 text-neutral-100">
+          <span className="px-2 py-1 text-xs rounded-md bg-neutral-700 text-neutral-100">
             {subscribersCount}
           </span>{" "}
           subscribers now !
