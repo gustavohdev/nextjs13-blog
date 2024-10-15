@@ -4,14 +4,32 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import Footer from "@/components/navigation/footer";
+import siteConfig from "@/config/site";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Gustavo Avide - Portfolio/Tech Blog",
-  description: "A minimal portofolio and blog website.",
+  description:
+    "Welcome to my portfolio and tech blog where I share insights on technology, coding, and personal projects.",
   keywords:
-    "portfolio, tech blog, Gustavo Avide, web development, JavaScript, React, AWS, Next",
+    "portfolio, tech blog, Gustavo Avide, web development, JavaScript, React, AWS, Next, TypeScript, Nodejs",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://gustavoavide.com",
+    title: "Gustavo Avide - Portfolio/Tech Blog",
+    description: "Insights on technology, coding, and personal projects.",
+    images: [
+      {
+        url: siteConfig.photo,
+        width: 400,
+        height: 200,
+        alt: "Gustavo Avide - Portfolio Banner",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
