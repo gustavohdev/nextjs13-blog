@@ -89,7 +89,7 @@ const CTACard = async () => {
         fill
         alt="CTA Card Image"
         className="object-cover object-center"
-        src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/f8f22331-0ed9-41f9-9f56-790d43beecff.jpg`}
+        src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/f0dcf9e5-f440-4b27-9613-c1801be37f24?key=optimised`}
       />
       {/* Content Container */}
       <div className="relative z-20">

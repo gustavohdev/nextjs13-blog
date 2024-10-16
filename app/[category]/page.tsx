@@ -6,14 +6,26 @@ import axios from "axios";
 import { notFound } from "next/navigation";
 
 export const generateStaticParams = async () => {
-  // return DUMMY_CATEGORIES.map((category) => {
-  //   return {
-  //     category: category.slug,
-  //   };
-  // });
+  //@TODO: Enable Categories in the future
+  //       const client = createDirectus(process.env.NEXT_PUBLIC_API_URL as string)
+  //   .with(staticToken(process.env.ADMIN_TOKEN as string))
+  //   .with(rest());
+
+  // const posts = await client.request(
+  //   readItems("post", {
+  //     fields: [
+  //       "*",
+  //       "author.id",
+  //       "author.first_name",
+  //       "author.last_name",
+  //       "category.id",
+  //       "category.title",
+  //     ],
+  //   })
+  // );
 
   try {
-    // @TODO: filter for only published
+    // @TODO: filter for only published, together with the part above ( it's desactivated for now the categories)
     const categories = await axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/items/category`, {
         headers: {

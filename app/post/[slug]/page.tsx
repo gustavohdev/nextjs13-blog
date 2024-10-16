@@ -4,16 +4,11 @@ import SocialLink from "@/components/elements/social-link";
 import PaddingContainer from "@/components/layout/padding-container";
 import PostBody from "@/components/post/post-body";
 import PostHero from "@/components/post/post-hero";
+import { createDirectus, readItems, rest, staticToken } from "@directus/sdk";
 import axios from "axios";
 import { notFound } from "next/navigation";
 
 export const generateStaticParams = async () => {
-  // return DUMMY_POSTS.map((post) => {
-  //     return {
-  //         slug: post.slug
-  //     }
-  // })
-
   const posts = await axios
     .get(`${process.env.NEXT_PUBLIC_API_URL}/items/post`, {
       headers: {
@@ -31,8 +26,6 @@ export const generateStaticParams = async () => {
     };
   });
 
-  console.log("myparams", params);
-
   return params || [];
 };
 
@@ -43,30 +36,31 @@ const Page = async ({
     slug: string;
   };
 }) => {
-  // const post = DUMMY_POSTS.find((post) => {
-  //   return post.slug === params.slug;
-  // });
-
   const getPostData = async () => {
     try {
-      const posts = await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/items/post/`, {
-          headers: {
-            Authorization: `Bearer ${process.env.ADMIN_TOKEN}`,
-            "Content-Type": "application/json",
+      const client = createDirectus(process.env.NEXT_PUBLIC_API_URL as string)
+        .with(staticToken(process.env.ADMIN_TOKEN as string))
+        .with(rest());
+
+      const post: any = await client.request(
+        readItems("post", {
+          filter: {
+            slug: {
+              _eq: params.slug,
+            },
           },
+          fields: [
+            "*",
+            "author.id",
+            "author.first_name",
+            "author.last_name",
+            "category.id",
+            "category.title",
+          ],
         })
-        .then((data) => {
-          const filteredPost = data.data.data.filter((item: any) => {
-            return item.slug === params.slug;
-          });
-          console.log("SLUG PARAMS", params.slug);
-          console.log("filteredPost", filteredPost);
+      );
 
-          return filteredPost;
-        });
-
-      return posts;
+      return post;
     } catch (error) {
       console.error(error);
       throw new Error("Error fetching post: ");
@@ -74,8 +68,6 @@ const Page = async ({
   };
 
   const post = await getPostData();
-
-  console.log("MYPOSTS,", post);
 
   if (!post) {
     notFound();
