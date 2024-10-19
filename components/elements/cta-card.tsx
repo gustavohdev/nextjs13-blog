@@ -86,6 +86,7 @@ const CTACard = async () => {
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-gradient-to-br from-white/95 via-white/70"></div>
       <Image
+        priority
         fill
         alt="CTA Card Image"
         className="object-cover object-center"

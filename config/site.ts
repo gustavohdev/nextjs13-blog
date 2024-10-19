@@ -33,7 +33,7 @@ const siteConfig: SiteConfig = {
     facebook: "facebook",
     codewars: "https://www.codewars.com/users/gustavohdev",
   },
-  photo: `${process.env.NEXT_PUBLIC_ASSETS_URL}/1d9d8cb1-387e-407f-9cf0-31473bc92afe.png`,
+  photo: `${process.env.NEXT_PUBLIC_ASSETS_URL}/1d9d8cb1-387e-407f-9cf0-31473bc92afe?key=optimised`,
 };
 
 export default siteConfig;
