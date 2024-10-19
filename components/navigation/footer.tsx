@@ -20,7 +20,7 @@ const Footer = () => {
           ></Image>
         </div>
         <div>
-          <h2 className="text-3xl font-bold">{siteConfig.siteName}</h2>
+          <h2 className="text-2xl font-semibold pt-1">{siteConfig.siteName}</h2>
           <p className="max-w-md mt-2 text-lg text-neutral-700">
             {siteConfig.description}
           </p>
