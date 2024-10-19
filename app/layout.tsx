@@ -5,11 +5,12 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import Footer from "@/components/navigation/footer";
 import siteConfig from "@/config/site";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gustavo Avide - Portfolio/Tech Blog",
+  title: "Gustavo Avide - Software Engineer",
   description:
     "Welcome to my portfolio and tech blog where I share insights on technology, coding, and personal projects.",
   keywords:
@@ -19,16 +20,19 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://gustavoavide.com",
-    title: "Gustavo Avide - Portfolio/Tech Blog",
+    title: "Gustavo Avide - Software Engineer",
     description: "Insights on technology, coding, and personal projects.",
     images: [
       {
         url: siteConfig.photo,
-        width: 400,
-        height: 200,
+        width: 150,
+        height: 100,
         alt: "Gustavo Avide - Portfolio Banner",
       },
     ],
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 
