@@ -1,4 +1,3 @@
-import { DUMMY_CATEGORIES, DUMMY_POSTS } from "@/DUMMY_DATA";
 import PaddingContainer from "@/components/layout/padding-container";
 import PostList from "@/components/post/post-lists";
 import { Post } from "@/types/collection";
