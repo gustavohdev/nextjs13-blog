@@ -1,4 +1,3 @@
-import { DUMMY_POSTS } from "@/DUMMY_DATA";
 import CTACard from "@/components/elements/cta-card";
 import SocialLink from "@/components/elements/social-link";
 import PaddingContainer from "@/components/layout/padding-container";
@@ -87,28 +86,28 @@ const Page = async ({
                 isSharedUrl
                 plataform="facebook"
                 link={`https://www.facebook.com/sharer/sharer.php?u=
-                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.slug}`}`}
+                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post[0].slug}`}`}
               />
               {/* have to use the link for twitter share */}
               <SocialLink
                 isSharedUrl
                 plataform="twitter"
                 link={`https://twitter.com/intent/tweet?url=
-                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.slug}`}`}
+                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post[0].slug}`}`}
               />
               {/* have to use the link for linkedin share */}
               <SocialLink
                 isSharedUrl
                 plataform="linkedin"
                 link={`https://www.linkedin.com/shareArticle?mini=true&url=
-                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.slug}`}`}
+                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post[0].slug}`}`}
               />
               {/* have to use the link for whatts app share */}
               <SocialLink
                 isSharedUrl
                 plataform="whatsapp"
                 link={`https://api.whatsapp.com/send?text=
-                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.slug}`}`}
+                                ${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post[0].slug}`}`}
               />
             </div>
           </div>
