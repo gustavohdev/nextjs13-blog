@@ -42,11 +42,11 @@ export default async function Home() {
     <PaddingContainer>
       <main className="h-auto space-y-10">
         <PostCard post={posts[0]} />
-        <PostList
+        {/* <PostList
           posts={posts.filter(
             (post: any, index: any) => index > 0 && index < 3
           )}
-        />
+        /> */}
         <CTACard />
         {/* <PostCard post={posts[3]} reverse={true} />
         <PostList
