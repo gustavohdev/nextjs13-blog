@@ -75,7 +75,7 @@ const Footer = () => {
           </div>
           <div className="text-sm text-neutral-400">
             {/* TODO: Still to put a Link to my linkedin in the name */}
-            Made with excellence by{" "}
+            Made by{" "}
             <Link
               href={siteConfig.socialLinks.linkedin}
               className="underline underline-offset-4"
