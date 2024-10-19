@@ -2,10 +2,8 @@ import Navigation from "@/components/navigation/navigation";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import Footer from "@/components/navigation/footer";
 import siteConfig from "@/config/site";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,9 +28,6 @@ export const metadata: Metadata = {
         alt: "Gustavo Avide - Portfolio Banner",
       },
     ],
-  },
-  icons: {
-    icon: "/favicon.ico",
   },
 };
 
