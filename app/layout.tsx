@@ -31,11 +31,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // @TODO: Maybe there's a better way to not cache and revalidate the data.
+  // was buggy when putting "page" in the type inside the revalidate tag, sometimes the home page revalidated, sometimes not
+  // sometimes only the post revalidated
+
+  if (process.env.NODE_ENV === "development") {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate?token=${process.env.ADMIN_TOKEN}`,
+      { cache: "no-store" } // Ensures no caching
+    );
+
+    const data = await response.json();
+    console.log("nothing cached, new data: ", data);
+  }
   return (
     <html lang="en">
       <body className={inter.className}>
