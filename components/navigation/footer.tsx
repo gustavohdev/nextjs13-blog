@@ -12,11 +12,11 @@ const Footer = () => {
       <PaddingContainer>
         <div className="">
           <Image
-            className="w-40 h-40 rounded-full object-cover"
+            className="w-40 h-40 lg:w-48 lg:h-48 rounded-full object-cover"
             src={siteConfig.photo}
-            alt="me"
-            width={600}
-            height={400}
+            alt="me-icon-footer"
+            width={160}
+            height={160}
           ></Image>
         </div>
         <div>

@@ -14,13 +14,13 @@ export const Navigation = () => {
             href="/"
             className="flex gap-2 text-lg font-bold transition-transform duration-300 ease-in-out hover:scale-110"
           >
-            {/* TODO: Put here a small circle with a photo of me */}
+            {/* TODO: put inside site.config photo */}
             <Image
               className="w-7 h-7 rounded-full object-cover"
-              src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/5bbc7446-0572-4f21-82cf-47788842b68f.jpg`}
-              alt="me"
-              width={600}
-              height={400}
+              src={`${process.env.NEXT_PUBLIC_ASSETS_URL}/5bbc7446-0572-4f21-82cf-47788842b68f?key=optimised`}
+              alt="me-icon-nav"
+              width={28}
+              height={28}
             ></Image>
             <span>Gustavo's Blog</span>
           </Link>
