@@ -1,5 +1,12 @@
 import parse, { Element } from "html-react-parser";
 import Image from "next/image";
+import Prism from "prismjs";
+import "prismjs/themes/prism.css"; // Or any Prism theme you prefer
+
+// Optionally, import additional languages
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-css";
+import "prismjs/components/prism-markup";
 
 const PostBody = ({ body }: { body: string }) => {
   const options = {
@@ -18,6 +25,25 @@ const PostBody = ({ body }: { body: string }) => {
             />
           );
         }
+      }
+      if (domNode.name === "pre" && domNode.children && domNode.children[0]) {
+        const code = domNode.children[0].children[0].data; // Extract code from <pre><code>
+        const language = domNode.attribs.class || "javascript"; // Default to JavaScript if no class
+
+        // Highlight the code using Prism
+        const highlightedCode = Prism.highlight(
+          code,
+          Prism.languages[language],
+          language
+        );
+
+        return (
+          <pre
+            className={`${language} bg-gray-800 text-gray-100 p-4 rounded overflow-auto`}
+          >
+            <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+          </pre>
+        );
       }
     },
   };

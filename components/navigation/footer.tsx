@@ -41,7 +41,6 @@ const Footer = () => {
               <SocialLink
                 plataform="github"
                 link={siteConfig.socialLinks.github}
-                aria-label="GitHub Profile"
               />
               {/* <SocialLink
                 plataform="youtube"
@@ -50,12 +49,10 @@ const Footer = () => {
               <SocialLink
                 plataform="linkedin"
                 link={siteConfig.socialLinks.linkedin}
-                aria-label="LinkedIn Profile"
               />
               <SocialLink
                 plataform="codewars"
                 link={siteConfig.socialLinks.codewars}
-                aria-label="CodeWars Profile"
               />
               {/* <SocialLink
                 plataform="facebook"

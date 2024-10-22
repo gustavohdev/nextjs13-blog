@@ -20,7 +20,6 @@ const SocialLink = ({
   link: string;
   isSharedUrl?: boolean;
 }) => {
-  //console.log(icons.siWhatsapp)
   const getIcon = (plataform: string) => {
     switch (plataform) {
       case "facebook":
@@ -63,6 +62,12 @@ const SocialLink = ({
         );
     }
   };
+
+  // @TODO: ACCESSABILITY
+  //aria-label="GitHub Profile"
+  // aria-label="LinkedIn Profile"
+  //                 aria-label="CodeWars Profile"
+  // have to put this above, in the LINK component in order to have accesability
 
   return (
     <Link href={link} target="_blank">
