@@ -6,6 +6,7 @@ import PostHero from "@/components/post/post-hero";
 import { createDirectus, readItems, rest, staticToken } from "@directus/sdk";
 import axios from "axios";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 export const generateStaticParams = async () => {
   const posts = await axios
@@ -28,6 +29,64 @@ export const generateStaticParams = async () => {
   return params || [];
 };
 
+export const generateMetadata = async ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
+  const post = await getPostData(slug);
+
+  return {
+    title: post[0]?.title,
+    descrition: post[0]?.description,
+    openGraph: {
+      title: post[0]?.title,
+      description: post[0]?.description,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      siteName: post[0]?.title,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_ASSETS_URL}/${post[0].image}?key=optimised`,
+          width: 1280,
+          height: 500,
+        },
+      ],
+      type: "website",
+    },
+  };
+};
+
+const getPostData = cache(async (postSlug: string) => {
+  try {
+    const client = createDirectus(process.env.NEXT_PUBLIC_API_URL as string)
+      .with(staticToken(process.env.ADMIN_TOKEN as string))
+      .with(rest());
+
+    const post: any = await client.request(
+      readItems("post", {
+        filter: {
+          slug: {
+            _eq: postSlug,
+          },
+        },
+        fields: [
+          "*",
+          "author.id",
+          "author.first_name",
+          "author.last_name",
+          "category.id",
+          "category.title",
+        ],
+      })
+    );
+
+    return post;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error fetching post: ");
+  }
+});
+
 const Page = async ({
   params,
 }: {
@@ -35,38 +94,9 @@ const Page = async ({
     slug: string;
   };
 }) => {
-  const getPostData = async () => {
-    try {
-      const client = createDirectus(process.env.NEXT_PUBLIC_API_URL as string)
-        .with(staticToken(process.env.ADMIN_TOKEN as string))
-        .with(rest());
+  const postSlug = params.slug;
 
-      const post: any = await client.request(
-        readItems("post", {
-          filter: {
-            slug: {
-              _eq: params.slug,
-            },
-          },
-          fields: [
-            "*",
-            "author.id",
-            "author.first_name",
-            "author.last_name",
-            "category.id",
-            "category.title",
-          ],
-        })
-      );
-
-      return post;
-    } catch (error) {
-      console.error(error);
-      throw new Error("Error fetching post: ");
-    }
-  };
-
-  const post = await getPostData();
+  const post = await getPostData(postSlug);
 
   if (!post) {
     notFound();
