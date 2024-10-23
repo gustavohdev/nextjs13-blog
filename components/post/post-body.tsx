@@ -39,7 +39,7 @@ const PostBody = ({ body }: { body: string }) => {
 
         return (
           <pre
-            className={`${language} bg-gray-800 text-gray-100 p-4 rounded overflow-auto`}
+            className={`${language} bg-gray-800 text-gray-100 p-2 md:p-4 text-xs md:text-base rounded overflow-auto`}
           >
             <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
           </pre>
