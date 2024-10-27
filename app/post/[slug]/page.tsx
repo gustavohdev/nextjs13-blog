@@ -3,10 +3,8 @@ import SocialLink from "@/components/elements/social-link";
 import PaddingContainer from "@/components/layout/padding-container";
 import PostBody from "@/components/post/post-body";
 import PostHero from "@/components/post/post-hero";
-import { createDirectus, readItems, rest, staticToken } from "@directus/sdk";
 import axios from "axios";
 import { notFound } from "next/navigation";
-import { cache } from "react";
 import { getPostData } from "@/lib/api";
 
 export const generateStaticParams = async () => {
@@ -43,17 +41,17 @@ export const generateMetadata = async ({
     openGraph: {
       title: post[0]?.title,
       description: post[0]?.description,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}`,
       siteName: post[0]?.title,
       // If you have the opengraph slug, you don't need this anymore,
       // maybe if you don't want anything fancing, you can just put a simple photo
-      // images: [
-      //   {
-      //     url: "https://localhost:3000/opengraph-image.png",
-      //     width: 1280,
-      //     height: 500,
-      //   },
-      // ],
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}/opengraph-image`,
+          width: 1200,
+          height: 630,
+        },
+      ],
       type: "website",
     },
   };
