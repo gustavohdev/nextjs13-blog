@@ -44,19 +44,21 @@ export const generateMetadata = async ({
       description: post[0]?.description,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
       siteName: post[0]?.title,
-      images: [
-        {
-          url: `${process.env.NEXT_PUBLIC_ASSETS_URL}/${post[0].image}?key=optimised`,
-          width: 1280,
-          height: 500,
-        },
-      ],
+      // If you have the opengraph slug, you don't need this anymore,
+      // maybe if you don't want anything fancing, you can just put a simple photo
+      // images: [
+      //   {
+      //     url: "https://localhost:3000/opengraph-image.png",
+      //     width: 1280,
+      //     height: 500,
+      //   },
+      // ],
       type: "website",
     },
   };
 };
 
-const getPostData = cache(async (postSlug: string) => {
+export const getPostData = cache(async (postSlug: string) => {
   try {
     const client = createDirectus(process.env.NEXT_PUBLIC_API_URL as string)
       .with(staticToken(process.env.ADMIN_TOKEN as string))
@@ -98,12 +100,32 @@ const Page = async ({
 
   const post = await getPostData(postSlug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: post[0].title,
+    image: `${process.env.NEXT_PUBLIC_ASSETS_URL}/${post[0]?.image}`,
+    author: post[0].author.first_name + " " + post[0].author.last_name,
+    genre: post[0].category.title,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/post/${postSlug}`,
+    datePublished: new Date(post[0].date_created).toISOString(),
+    dateCreated: new Date(post[0].date_created).toISOString(),
+    dateModified: new Date(post[0].date_updated).toISOString(),
+    description: post[0].description,
+    articleBody: post[0].body,
+  };
+
   if (!post) {
     notFound();
   }
   return (
     <PaddingContainer>
       {/* Container */}
+      {/* Add JSON-LD to your page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="space-y-10">
         {/* Post Hero */}
         <PostHero post={post[0]} />
