@@ -1,7 +1,7 @@
 import parse, { Element } from "html-react-parser";
 import Image from "next/image";
 import Prism from "prismjs";
-import "prismjs/themes/prism.css"; // Or any Prism theme you prefer
+import "prismjs/themes/prism-okaidia.css"; // Or any Prism theme you prefer
 
 // Optionally, import additional languages
 import "prismjs/components/prism-javascript";
