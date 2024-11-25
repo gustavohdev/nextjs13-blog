@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Footer from "@/components/navigation/footer";
 import siteConfig from "@/config/site";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,6 +52,18 @@ export default async function RootLayout({
   }
   return (
     <html lang="en">
+      {/* <!-- Google tag (gtag.js) --> */}
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-LEDQYCMCN3"
+      ></Script>
+      <Script id="google-analytics">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-LEDQYCMCN3')`}
+      </Script>
       <body className={inter.className}>
         <Navigation />
         <div className="pt-10 min-h-[calc(100vh-400px)]">{children}</div>
