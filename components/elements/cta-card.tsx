@@ -1,37 +1,41 @@
-import React from "react";
+"use client";
+import React, { FormEvent, useState } from "react";
 import Image from "next/image";
-import directus from "@/lib/directus";
-import axios from "axios";
-import { revalidateTag } from "next/cache";
+// import directus from "@/lib/directus";
+// import axios from "axios";
+// import { revalidateTag } from "next/cache";
 import siteConfig from "@/config/site";
+import { createDirectus, createItem, rest } from "@directus/sdk";
 
-const CTACard = async () => {
-  const formAction = async (formData: FormData) => {
-    "use server";
-    try {
-      const email = formData.get("email");
-      console.log("EMAIL", email);
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/items/subscribers
-      `,
-        {
-          email: email,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.ADMIN_TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      revalidateTag("subscribers-count");
-      // await directus.items("subscribers").createOne({
-      //     email,
-      // })
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const CTACard = () => {
+  // Server Actions Approach
+
+  // const formAction = async (formData: FormData) => {
+  //   "use server";
+  //   try {
+  //     const email = formData.get("email");
+  //     console.log("EMAIL", email);
+  //     await axios.post(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/items/subscribers
+  //     `,
+  //       {
+  //         email: email,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${process.env.ADMIN_TOKEN}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     revalidateTag("subscribers-count");
+  //     // await directus.items("subscribers").createOne({
+  //     //     email,
+  //     // })
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   //   const subscribersCount = await axios
   //     .get(
@@ -54,32 +58,56 @@ const CTACard = async () => {
   //     })
   //     .catch((err) => console.log(err));
 
-  const subscribersCount = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/items/subscribers?meta=total_count`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.ADMIN_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      next: {
-        tags: ["subscribers-count"], // optional, depending on where you manage revalidation
-      },
+  // const subscribersCount = await fetch(
+  //   `${process.env.NEXT_PUBLIC_API_URL}/items/subscribers?meta=total_count`,
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${process.env.ADMIN_TOKEN}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //     next: {
+  //       tags: ["subscribers-count"], // optional, depending on where you manage revalidation
+  //     },
+  //   }
+  // )
+  //   .then((response) => {
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch subscribers count");
+  //     }
+  //     return response.json();
+  //   })
+  //   .then((data) => {
+  //     return data.meta.total_count;
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //     return 0; // fallback in case of error
+  //   });
+
+  // Client Components Approach
+
+  const [email, setEmail] = useState("");
+  const [isHandling, setIsHandling] = useState(false);
+
+  const submithandler = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setIsHandling(true);
+      const client = createDirectus(
+        process.env.NEXT_PUBLIC_API_URL as string
+      ).with(rest());
+
+      await client.request(createItem("subscribers ", { email }));
+
+      setIsHandling(false);
+      setEmail("");
+    } catch (error) {
+      console.log(error);
+      setIsHandling(false);
     }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch subscribers count");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      return data.meta.total_count;
-    })
-    .catch((error) => {
-      console.error(error);
-      return 0; // fallback in case of error
-    });
+  };
 
   return (
     <div className="relative px-6 py-10 overflow-hidden rounded-md bg-slate-100">
@@ -105,29 +133,37 @@ const CTACard = async () => {
         </p>
         {/* Form */}
         <form
-          key={subscribersCount + "subscribers-form"}
-          action={formAction}
+          // Server Actions Approach
+          // key={subscribersCount + "subscribers-form"}
+          // action={formAction}
+          onSubmit={submithandler}
           className="flex items-center gap-2 mt-6 w-full"
         >
           <input
             type="email"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Write your email"
             className="w-full md:w-auto px-3 py-2 text-base rounded-md outline-none placeholder:text-sm bg-white/80 focus:ring-2 ring-neutral-600"
           ></input>
-          <button className="px-3 py-2 rounded-md bg-neutral-900 text-neutral-200 whitespace-nowrap">
-            Sign Up
+          <button
+            type="submit"
+            className="px-3 py-2 rounded-md bg-neutral-900 text-neutral-200 whitespace-nowrap"
+          >
+            {!isHandling ? "Sign Up" : "Subscribing..."}
           </button>
         </form>
 
         {/* Subscribers */}
-        <div className="mt-5 text-neutral-600">
+        {/* Server Actions Approach */}
+        {/* <div className="mt-5 text-neutral-600">
           Join our{" "}
           <span className="px-2 py-1 text-xs rounded-md bg-neutral-700 text-neutral-100">
             {subscribersCount}
           </span>{" "}
           subscribers now !
-        </div>
+        </div> */}
       </div>
     </div>
   );
