@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://acme.com/sitemap.xml
+# Specify the location of your sitemap
+Sitemap: https://gustavoavide.com/sitemap.xml
